@@ -1,0 +1,15 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Montserrat SemiBold';
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#gameGrid {
+    border: 1px solid black;
+}
