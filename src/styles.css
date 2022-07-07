@@ -1,15 +1,30 @@
 * {
-    box-sizing: border-box;
-    font-family: 'Montserrat SemiBold';
+  box-sizing: border-box;
+  font-family: 'Montserrat SemiBold';
 }
 
 body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
 #gameGrid {
-    border: 1px solid black;
+  width: 800px;
+  height: 800px;
+  background-color: #f2f2f2;
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.newCell {
+  width: 39.9px;
+  height: 39.9px;
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
