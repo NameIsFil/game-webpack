@@ -1,43 +1,43 @@
-import './styles.css';
-
-const gameGrid = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-];
-
 const visibleGameGrid = document.querySelector('#gameGrid');
 // const characterPlayer = document.createElement()
 
+const rows = 20;
+const columns = 20;
+const gameGrid = [];
+
 function createGameGrid() {
-  for (let i = 0; i < gameGrid.length; i++) {
-    for (let j = 0; j < gameGrid[i].length; j++) {
+  for (let i = 0; i < rows; i++) {
+    gameGrid[i] = [];
+    for (let j = 0; j < columns; j++) {
       let cell = document.createElement('div');
       cell.classList.add('newCell');
-      cell.innerHTML = 'x';
+      gameGrid[i][j] = cell;
       visibleGameGrid.appendChild(cell);
+    }
+  }
+  spawnCharacters();
+}
+createGameGrid();
+
+function moveRight(character) {
+  for (let i = 0; i < gameGrid.length; i++) {
+    for (let j = 0; j < gameGrid[i].length; j++) {
+      if (gameGrid[i][j].contains(character)) {
+        gameGrid[i][j].remove(character);
+        gameGrid[i][j + 1].appendChild(character);
+      }
     }
   }
 }
 
-createGameGrid();
+function spawnCharacters() {
+  const randomIndex1 = Math.floor(Math.random() * 20);
+  const randomIndex2 = Math.floor(Math.random() * 20);
+  let player = document.createElement('div');
+  player.classList.add('player');
+
+  gameGrid[randomIndex1][randomIndex2].appendChild(player);
+}
 
 function characterMovement(keyboardKey) {
   //up
@@ -45,31 +45,32 @@ function characterMovement(keyboardKey) {
     alert('up');
   }
   //right-up
-  if (keyboardKey.keyCode === 33) {
+  else if (keyboardKey.keyCode === 33) {
     alert('right, up');
   }
   //right
-  if (keyboardKey.keyCode === 39) {
+  else if (keyboardKey.keyCode === 39) {
+    moveRight(player);
     alert('right');
   }
   //right-down
-  if (keyboardKey.keyCode === 34) {
+  else if (keyboardKey.keyCode === 34) {
     alert('right, down');
   }
   //down
-  if (keyboardKey.keyCode === 40) {
+  else if (keyboardKey.keyCode === 40) {
     alert('down');
   }
   //left-down
-  if (keyboardKey.keyCode === 35) {
+  else if (keyboardKey.keyCode === 35) {
     alert('left, down');
   }
   //left
-  if (keyboardKey.keyCode === 37) {
+  else if (keyboardKey.keyCode === 37) {
     alert('left');
   }
   //left-up
-  if (keyboardKey.keyCode === 36) {
+  else if (keyboardKey.keyCode === 36) {
     alert('left, up');
   }
 }

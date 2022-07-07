@@ -10,8 +10,8 @@ body {
 }
 
 #gameGrid {
-  width: 800px;
-  height: 800px;
+  width: 782px;
+  height: 780px;
   background-color: #f2f2f2;
   border: 1px solid black;
   display: flex;
@@ -21,8 +21,20 @@ body {
 }
 
 .newCell {
-  width: 39.9px;
-  height: 39.9px;
+  width: 39px;
+  height: 39px;
+
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.player {
+  background-image: url(face.png);
+  background-size: 100%;
+  width: 39px;
+  height: 39px;
   border: 1px solid grey;
   display: flex;
   align-items: center;
